@@ -1,3 +1,4 @@
 .idea
 target
 auth.iml
+/src/main/resources/application-default.properties
