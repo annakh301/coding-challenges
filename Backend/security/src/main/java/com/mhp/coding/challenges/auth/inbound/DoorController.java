@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/doors")
+
 public class DoorController {
 
     private final DoorProvider doorProvider;
@@ -16,15 +16,15 @@ public class DoorController {
     public DoorController(DoorProvider doorProvider) {
         this.doorProvider = doorProvider;
     }
-
-    @GetMapping
+    
+    @GetMapping("/v1/doors")
     @ResponseBody
     public ResponseEntity<List<Door>> listDoors() {
         return ResponseEntity.ok(this.doorProvider.triggerDoorListing());
     }
 
-    @PutMapping
-    public ResponseEntity changeDoorState(@RequestBody Door door) {
+    @PutMapping("/v1/doors/{id}")
+    public ResponseEntity changeDoorState(@RequestBody Door door, @PathVariable Long id) {
         Door newDoor = this.doorProvider.triggerDoorStateChange(door);
         return newDoor == null ? ResponseEntity.badRequest().build() : ResponseEntity.ok(newDoor);
     }
