@@ -3,6 +3,7 @@ package com.mhp.coding.challenges.auth.inbound;
 import com.mhp.coding.challenges.auth.core.entities.Door;
 import com.mhp.coding.challenges.auth.core.inbound.DoorProvider;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class DoorController {
         return ResponseEntity.ok(this.doorProvider.triggerDoorListing());
     }
 
+//    @PreAuthorize("hasAuthority('email')")
     @PutMapping("/v1/doors/{id}")
     public ResponseEntity changeDoorState(@RequestBody Door door, @PathVariable Long id) {
         Door newDoor = this.doorProvider.triggerDoorStateChange(door);
